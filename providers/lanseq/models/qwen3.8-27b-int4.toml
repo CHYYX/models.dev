@@ -1,22 +1,28 @@
-# First-party Lanseq deployment documentation:
+# First-party Lanseq deployment documentation (checked 2026-10-26):
 # https://api.lanseq.cloud/docs
-# Pricing: input = $0.25/M tokens, cache_read = $0.045/M tokens, output = $1.99/M tokens.
+# Pricing: input = $0.25/M tokens, output = $1.99/M tokens (USD).
 # Limits: context = 70,000 tokens, max output = 8,192 tokens.
+# Capabilities: text input/output, tool calling, structured/JSON output, reasoning.
 # Reasoning wire control: reasoning_effort = none | low | medium | xhigh.
-
+# Cached-input pricing is omitted: the current public docs do not publish a rate.
+# Batch and Preflight are product architecture, not capabilities of this catalog SKU.
+# v2 requires both modality arrays when overriding the lab's multimodal input.
+schema = 2
 base_model = "alibaba/qwen3.8-27b"
 name = "Qwen3.8-27B INT4"
 description = "Text-only INT4 deployment of Qwen3.8-27B served by Lanseq."
-attachment = false
 
-reasoning_options = [
-  { type = "effort", values = ["none", "low", "medium", "xhigh"] },
-]
+[capabilities]
+reasoning = { supported = true, effort = ["none", "low", "medium", "xhigh"] }
+structured_output = true
 
-[cost]
-input = 0.25
-output = 1.99
-cache_read = 0.045
+[api.chat-completions]
+
+[cost.text.input]
+price = 0.25
+
+[cost.text.output]
+price = 1.99
 
 [limit]
 context = 70_000
@@ -24,3 +30,4 @@ output = 8_192
 
 [modalities]
 input = ["text"]
+output = ["text"]

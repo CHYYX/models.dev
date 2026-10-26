@@ -1,5 +1,10 @@
+# Lanseq: Multi-Model Inference Infrastructure.
+# Product architecture: Real-time Inference, Batch Execution, Preflight Intelligence.
+# https://lanseq.cloud (Preflight is in development; availability is integration-specific).
+# This catalog entry describes only the documented production Chat Completions SKU.
 name = "Lanseq"
 npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
 env = ["LANSEQ_API_KEY"]
 api = "https://api.lanseq.cloud/v1"
 doc = "https://api.lanseq.cloud/docs"
